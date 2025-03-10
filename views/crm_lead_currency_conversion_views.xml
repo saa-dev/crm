@@ -1,0 +1,13 @@
+<odoo>
+    <record id="crm_lead_kanban_currency_conversion_view" model="ir.ui.view">
+        <field name="name">crm.lead.kanban.currency.conversion.view</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+        <field name="arch" type="xml">
+            <!-- Replace expected revenue with the converted value -->
+            <xpath expr="//field[@name='expected_revenue']" position="replace">
+                <field name="expected_revenue_converted" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

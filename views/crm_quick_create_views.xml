@@ -1,0 +1,32 @@
+<odoo>
+    <record id="view_crm_quick_create_form_inherit" model="ir.ui.view">
+        <field name="name">crm.quick_create_opportunity_form.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.quick_create_opportunity_form"/>
+        <field name="arch" type="xml">
+            <!-- Replace expected_revenue field -->
+            <xpath expr="//field[@name='expected_revenue']" position="replace">
+                <group>
+                    <div class="o_row" style="display: flex; align-items: center;">
+                        <!-- Currency Selection -->
+                        <field name="currency_id" class="oe_inline" 
+                               options="{'no_create': True, 'no_open': True}" 
+                               style="flex: 1; min-width: 80px;"/>
+                        <!-- Expected Revenue Input with Currency -->
+                        <field name="expected_revenue_with_currency" class="oe_inline"
+                               style="flex: 2; min-width: 80px; margin-left: 5px;"/>                
+                    </div>
+                </group>
+            </xpath>
+
+            <xpath expr="//field[@name='priority']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!-- Ensure the label matches the updated expected_revenue_with_currency field -->
+            <xpath expr="//label[@for='expected_revenue']" position="replace">
+                <label for="expected_revenue_with_currency" string="Expected Revenue"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

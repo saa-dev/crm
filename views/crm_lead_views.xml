@@ -1,0 +1,23 @@
+<odoo>
+    <record id="view_crm_lead_form_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Add currency selection dropdown -->
+            <field name="expected_revenue" position="before">
+                <field name="currency_id"/>
+            </field>
+
+            <!-- Replace expected_revenue and its label with the computed field -->
+            <xpath expr="//field[@name='expected_revenue']" position="replace">
+                <field name="expected_revenue_with_currency"/>
+            </xpath>
+
+            <!-- Ensure the label for expected_revenue is also replaced -->
+            <xpath expr="//label[@for='expected_revenue']" position="replace">
+                <label for="expected_revenue_with_currency" string="Expected Revenue"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
